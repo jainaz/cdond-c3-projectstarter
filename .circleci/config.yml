@@ -153,11 +153,14 @@ jobs:
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:Name,Values=backend-"${CIRCLE_WORKFLOW_ID:0:7}"" \
-            --output text >> ~/inventory.txt
-      - run:
-          name: Add back-end ip to ansible inventory
-          command: |
-            cat inventory.txt
+            --output text >> .circleci/ansible/inventory.txt
+            echo `cat .circleci/ansible/inventory.txt`
+      - run: 
+          name: Install tar and gzip
+          command: | 
+            apt update
+            apt install tar
+            apt install gzip
       - persist_to_workspace:
           root: ~/
           paths:
