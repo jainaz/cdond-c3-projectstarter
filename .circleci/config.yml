@@ -182,7 +182,8 @@ jobs:
           command: |
             cd .circleci/ansible
             ansible-playbook configure-server.yml -i inventory.txt
-      # Here's where you will add some code to rollback on failure      
+      # Here's where you will add some code to rollback on failure 
+      - destroy-environment     
 
   run-migrations:
     docker:
@@ -226,18 +227,28 @@ jobs:
     docker:
       - image: python:3.7-alpine3.11 
     steps:
-      # Checkout code from git
-      # Add ssh keys with fingerprint
-      # attach workspace
+      - checkout
+      - add_ssh_keys:
+            fingerprints: ["4a:a9:81:5a:cf:6d:1c:1d:6d:46:10:fb:13:57:9b:b7"] 
+      - attach_workspace:
+            at: ~/
       - run:
           name: Install dependencies
           command: |
-            # your code here
+            apk add --update ansible
       - run:
-          name: Deploy backend
+          name: Deploy backend to server
           command: |
-            # your code here
-      # Here's where you will add some code to rollback on failure  
+            cd backend
+            npm i
+            npm run build
+            cd ..
+            # Zip the directory
+            tar -C backend -czvf artifact.tar.gz .
+            cd .circleci/ansible
+            ansible-playbook deploy-backend.yml -i inventory.txt
+      # Here's where you will add some code to rollback on failure 
+      - destroy-environment 
 
   smoke-test:
     docker:
@@ -318,6 +329,7 @@ workflows:
       # - configure-infrastructure:
       #     requires: [deploy-infrastructure]
       - configure-infrastructure
+      - deploy-backend
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
