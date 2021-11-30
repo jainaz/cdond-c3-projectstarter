@@ -17,7 +17,7 @@
       wait_for_connection:
 
     - name: "install dependencies"
-        raw: sudo apt-get update
+      raw: sudo apt-get update
 
 
   # Get the environment variables from CircleCI and add to the EC2 instance
