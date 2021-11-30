@@ -236,6 +236,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update ansible
+            apk add --update nodejs nodejs-npm
       - run:
           name: Deploy backend to server
           command: |
@@ -328,7 +329,7 @@ workflows:
           #     only: [test-feature-branch]
       # - configure-infrastructure:
       #     requires: [deploy-infrastructure]
-      - configure-infrastructure
+      # - configure-infrastructure
       - deploy-backend
       # - run-migrations:
       #     requires: [configure-infrastructure]
