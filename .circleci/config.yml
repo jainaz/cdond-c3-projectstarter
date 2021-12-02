@@ -177,6 +177,8 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update ansible
+            pip install awscli --upgrade
+            aws --version
       - run:
           name: Configure server
           command: |
@@ -237,7 +239,8 @@ jobs:
           command: |
             apk add --update ansible
             apk add --update nodejs nodejs-npm
-            apk add --update 
+            pip install awscli --upgrade
+            aws --version
       - run:
           name: Deploy backend to server
           command: |
