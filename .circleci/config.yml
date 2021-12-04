@@ -206,31 +206,36 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
-      - run: yum -y install tar gzip
       - attach_workspace:
           at: ~/
-
       - run:
-          name: Install dependencies (Python)
-          command: |
-            yum -y install python3.8 python3-pip
+          name: update
+          command: |  
+            sudo apt update && sudo apt upgrade            
+            sudo apt install curl 
+      - run:
+          name: Install Python
+          command: |                        
+            sudo apt-get install python python-pip
             python --version
 
       - run:
-          name: Install dependencies ( nodejs)
-          command: |
-            yum -y install nodejs nodejs-npm            
+          name: Install aws
+          command: |                        
+            sudo pip install awscli
+            aws --version  
 
       - run:
           name: Get backend url
           command: |
             export BACKEND_IP=$(aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --filters "Name=tag:Name,Values=backend-e8a6eb6")
+            --filters "Name=tag:Name,Values=backend-e8a6eb6" \
+            --output text)
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
