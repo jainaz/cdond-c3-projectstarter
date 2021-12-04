@@ -21,7 +21,3 @@
     cd /home/ubuntu/backend           
     pm2 stop backend
     pm2 start npm --name "backend" -- run start >> /home/ubuntu/backend/start.log
-    register: command_output
-  
-- debug:
-      var: command_output.stdout_lines
