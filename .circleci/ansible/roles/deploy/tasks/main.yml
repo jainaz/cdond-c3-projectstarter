@@ -18,7 +18,10 @@
 - name: Executing node
   become: true
   shell: |   
-    cd /home/ubuntu/backend
-    npm install
+    cd /home/ubuntu/backend           
     pm2 stop backend
-    pm2 start npm --name "backend" -- start >> /home/ubuntu/backend/start.log
+    pm2 start npm --name "backend" -- run start >> /home/ubuntu/backend/start.log
+    register: command_output
+  
+- debug:
+      var: command_output.stdout_lines
