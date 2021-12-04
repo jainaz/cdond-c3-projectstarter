@@ -218,11 +218,8 @@ jobs:
           name: Install dependencies (Python)
           command: |
             yum -y install python3.8 python3-pip
-
-      - run:
-          name: Install dependencies (Ansible)
-          command: |
-            yum -y install ansible
+            python --version
+            ansible --version
 
       - run:
           name: Install dependencies ( nodejs)
