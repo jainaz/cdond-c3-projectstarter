@@ -28,6 +28,7 @@
   - name: Basic usage
     debug:
       msg: "'{{ lookup('env', 'TYPEORM_ENTITIES') }}' is the TYPEORM_ENTITIES environment variable."
+      msg: "'{{ lookup('env', 'TYPEORM_USERNAME') }}' is the TYPEORM_USERNAME environment variable."
     
   roles:
     - deploy
