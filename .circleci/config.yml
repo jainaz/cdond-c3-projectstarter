@@ -425,7 +425,7 @@ jobs:
                     --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
 
             echo Stack names: "${STACKS[@]}"
-            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID}" ]]
+            if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
             # your code goes here
               echo "remove previous stack"
