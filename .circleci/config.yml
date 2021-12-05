@@ -319,6 +319,7 @@ jobs:
           command: |
             apk add --update ansible
             apk add --update nodejs nodejs-npm
+            apk add --update curl
             pip install awscli --upgrade
             aws --version
       - run:
