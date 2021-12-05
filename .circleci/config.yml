@@ -195,6 +195,8 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
+      - attach_workspace:
+          at: ~/
       - run:
             name: Install dependencies
             command: |
@@ -452,12 +454,12 @@ workflows:
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      # - run-migrations:
+      #     requires: [configure-infrastructure]
       - deploy-frontend:
-          requires: [run-migrations]
+          requires: [configure-infrastructure]
       - deploy-backend:
-          requires: [run-migrations]          
+          requires: [configure-infrastructure]          
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
