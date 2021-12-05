@@ -415,7 +415,7 @@ workflows:
       #      requires: [configure-infrastructure]
       # - deploy-backend:
       #     requires: [configure-infrastructure]
-      -smoke-test
+      - smoke-test
       # - run-migrations:
       #     requires: [configure-infrastructure]
       # - deploy-frontend:
