@@ -37,6 +37,14 @@ Resources:
       # Ubuntu 18 or higher works fine
       ImageId: ami-083654bd07b5da81d 
 
+      UserData:
+        Fn::Base64: 
+          !Sub |
+            #!/bin/bash
+            cd /home/ubuntu/backend 
+            pm2 stop backend
+            pm2 start npm --name "backend" -- start
+
       Tags:
         - Key: Name
           Value: !Sub backend-${ID}
