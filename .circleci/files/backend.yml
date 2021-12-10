@@ -39,3 +39,15 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub backend-${ID}
+
+   #Allocate an Elastic IP in your Account
+  DemoElasticIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref EC2Instance
+
+Outputs:
+  PublicElasticIP:
+    Value: !Ref DemoElasticIP
+    Description: Public Elastic Ip           
