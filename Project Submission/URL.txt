@@ -2,11 +2,8 @@ GitHub [URL01]
 https://github.com/jainaz/cdond-c3-projectstarter
 
 Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-http://udapeople-1054b03.s3-website-us-east-1.amazonaws.com/#/employees
+http://udapeople-6154d28.s3-website-us-east-1.amazonaws.com/#/employees
+
 
 CircleCI URL:
-https://app.circleci.com/pipelines/github/jainaz/cdond-c3-projectstarter/105/workflows/1054b031-a557-416d-b4c4-d09eda52415b
-
-
-
-
+https://app.circleci.com/pipelines/github/jainaz/cdond-c3-projectstarter/107/workflows/6154d281-9795-466d-aa80-dabdaa3d247a
